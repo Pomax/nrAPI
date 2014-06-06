@@ -1,0 +1,1 @@
+ftp://ftp.monash.edu.au/pub/nihongo/JMdict.gz

@@ -1,0 +1,10 @@
+{
+  "author": "Pomax",
+  "title": "JMDict-to-SQL",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.4.1",
+    "sequelize": "~1.7.8",
+    "nunjucks": "~1.0.5"
+  }
+}

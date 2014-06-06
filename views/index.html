@@ -1,0 +1,24 @@
+<h1>node.js based REST api for Nihongo Resources data</h1>
+
+<p>Search for something (english, roma-ji, hiragana, katakana, or kanji form)</p>
+<input type="text" placeholder="type something">
+<input type="submit" value="show"> (html)
+<input type="submit" value="find"> (json)
+<script>
+  var input = document.querySelector("input[type=text]");
+  var html = document.querySelector("input[value=show]");
+  var json = document.querySelector("input[value=find]");
+
+  function find(rest) {
+    window.location = "/" + rest + "/" + input.value;
+  };
+
+  html.onclick = function() { find("show"); };
+  json.onclick = function() { find("find"); };
+
+  input.onkeydown = function(evt) {
+    if(evt.which === 13 || evt.which === 10) {
+      find("show");
+    }
+  };
+</script>
