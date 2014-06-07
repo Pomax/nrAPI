@@ -127,7 +127,7 @@ parser.onend = function () {
                      Program run
 ********************************************************/
 try {
-  var file_buf = fs.readFileSync('JMdict');
+  var file_buf = fs.readFileSync('JMdict.xml');
   parser.write(file_buf.toString('utf8')).close();
 }
 catch(ex) {
