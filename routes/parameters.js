@@ -9,5 +9,3 @@ module.exports = function(app) {
 	  });
 	};
 };
-
-parameters("id", "term");

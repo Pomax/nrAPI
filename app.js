@@ -9,7 +9,7 @@ app.get('/entry/:id',  routes.entry);
 app.get('/find/:term', routes.find);
 app.get('/show/:term', routes.show);
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 8910;
 app.listen(port, function(err,res) {
   if(err) { console.error(err); exit(1); }
   console.log("server running on port "+port);
