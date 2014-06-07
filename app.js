@@ -2,7 +2,7 @@ var app = require('express')(),
     nunjucks = require('nunjucks').configure('views', { autoescape: true, express: app }),
     models = require('./lib/models')(require('sequelize')),
     parameters = require("./routes/parameters")(app)("id", "term"),
-    routes = require("./routes")(require("./lib/dataHandler")(models));
+    routes = require("./routes")(require("./lib/datahandler")(models));
 
 app.get('/',           routes.index);
 app.get('/entry/:id',  routes.entry);
