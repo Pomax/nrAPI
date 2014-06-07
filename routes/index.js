@@ -4,7 +4,7 @@ module.exports = function(dataHandler) {
       res.render("index.html");
     },
     entry: function(req, res) {
-      dataHandler.findEntry(req.id, function(err, result) {
+      dataHandler.getHandler(req.dict).findEntry(req.id, function(err, result) {
         if(err) {
           return res.json({ error: err });
         }
@@ -12,7 +12,7 @@ module.exports = function(dataHandler) {
       });
     },
     find: function(req, res, next) {
-      dataHandler.findAll(req.term, function(err, results) {
+      dataHandler.getHandler(req.dict).findAll(req.term, function(err, results) {
         if(err) {
           return res.json({ error: err });
         }
@@ -20,7 +20,7 @@ module.exports = function(dataHandler) {
       });
     },
     show: function(req, res) {
-      dataHandler.findAll(req.term, function(err, results) {
+      dataHandler.getHandler(req.dict).findAll(req.term, function(err, results) {
         if(err) {
           return res.json({ error: err });
         }
