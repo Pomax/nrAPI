@@ -1,4 +1,4 @@
-const START=0, END=1000000;
+const START=0, END=10000000;
 
 var fs = require('fs'),
     sax = require('sax'),
