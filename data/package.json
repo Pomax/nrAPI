@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "lazy": "*",
-    "sax": "*",
-    "xml2js": "^0.4.4"
-  }
-}

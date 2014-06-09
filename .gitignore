@@ -2,6 +2,7 @@
 .env
 node_modules
 data/node_modules
+**/*.gz
 
 **/*.xml
 **/res.json

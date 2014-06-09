@@ -3,9 +3,11 @@
   "title": "JMDict-to-SQL",
   "version": "0.0.1",
   "dependencies": {
+    "lazy": "*",
     "express": "~4.4.1",
     "nunjucks": "~1.0.5",
     "mysql": "~2.3.2",
+    "sax": "*",
     "sequelize": "~1.7.8"
   }
 }

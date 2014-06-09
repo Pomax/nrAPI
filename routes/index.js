@@ -24,7 +24,7 @@ module.exports = function(dataHandler) {
         if(err) {
           return res.json({ error: err });
         }
-        res.render("result.html", { results: results });
+        res.render(req.dict + "/result.html", { results: results });
       });
     }
   };

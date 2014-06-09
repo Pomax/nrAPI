@@ -77,7 +77,7 @@ parser.ontext = function (t) {
 };
 
 // an attribute.  attr has "name" and "value"
-parser.onattribute = function (attr) {
+var onattribute = function (attr) {
   if(container=="gloss" && attr.name=="XML:LANG") {
     ignoreGloss = true;
   }
@@ -113,8 +113,13 @@ parser.onopentag = function (node) {
     }
     curEntry = new Entry();
   }
-  if(container === "sense") {
+  else if(container === "sense") {
     curEntry.newSense();
+  }
+  else {
+    Object.keys(node.attributes).forEach(function(name) {
+      onattribute({name: name, value: node.attributes[name]});
+    })
   }
 };
 

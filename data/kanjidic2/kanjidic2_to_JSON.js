@@ -12,7 +12,7 @@ var fs = require('fs'),
 /**
  * ...
  */
-var Entry = function(){
+var Entry = function() {
   this.readings = [];
   this.meanings = [];
 };
@@ -57,18 +57,18 @@ parser.ontext = function (t) {
 };
 
 // an attribute.  attr has "name" and "value"
-parser.onattribute = function (attr) {
+var onattribute = function (attr) {
+  flags = {};
   var name = attr.name.toLowerCase(),
       value = attr.value.trim();
-  if(container==="cp_value" && name==="cp_type" && value==="ucs") {
-    flags[name] = true;
+  if(container==="cp_value" && name==="cp_type") {
+    flags[name] = (value==="ucs");
   }
-  if(container==="rad_value" && name==="rad_type"){//} && value==="classical") {
-    console.log(container, name, value);
-    flags[name] = true;
+  if(container==="rad_value" && name==="rad_type") {
+    flags[name] = (value==="classical");
   }
-  if(container==="reading" && name==="r_type" && (value==="ja_kun" || value==="ja_on")) {
-    flags[name] = true;
+  if(container==="reading" && name==="r_type") {
+    flags[name] = (value==="ja_kun" || value==="ja_on");
   }
   if(container==="meaning" && name==="m_lang") {
     flags[name] = true;
@@ -88,8 +88,12 @@ parser.onopentag = function (node) {
     if(END!==false && curCount>=END) {
       throw "we're done here. "+curCount+" entries parsed, run took "+(Date.now() - startTime)/1000+"s.";
     }
-    flags = {};
     curEntry = new Entry();
+  }
+  else {
+    Object.keys(node.attributes).forEach(function(name) {
+      onattribute({name: name, value: node.attributes[name]});
+    })
   }
 };
 
@@ -106,5 +110,6 @@ try {
   parser.write(file_buf.toString('utf8')).close();
 }
 catch(ex) {
-  //console.log(ex);
+  console.error(ex);
+  console.trace();
 }
