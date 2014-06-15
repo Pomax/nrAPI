@@ -19,13 +19,15 @@ a:hover {
 .sense:before {
   content: attr(data-count) ". ";
 }
+img {
+  width: 500px;
+}
 </style>
 
 {% for result in results %}
 {% if result == false %}<hr>{% else %}
 <div class="entry">
 
-  <img src="/images/kanji/{{ result.codepoint }}.svg">
   <div class="readings">{% for reading in result.readings %}<a href="{{ reading }}">{{ reading }}</a>{% endfor%}</div>
   <div class="meanings">{% for meaning in result.meanings %}<a href="{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
   <div>{{ result.literal }}</div>
@@ -50,6 +52,8 @@ a:hover {
   {% endfor %}
   </div>
   {% endif %}
+
+  <img src="/images/kanji/{{ result.codepoint }}.svg">
 
 </div>
 {% endif %}{% endfor %}
