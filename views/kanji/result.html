@@ -32,14 +32,31 @@ a:hover {
   {% endfor %}</div>
   {% endfor %}
 -->
-{{ result.readings }}<br>
-{{ result.meanings }}<br>
-{{ result.literal }}<br>
-{{ result.codepoint }}<br>
-{{ result.radical }}<br>
-{{ result.strokeCount }}<br>
-{{ result.frequency }}<br>
-{{ result.jlpt }}<br>
+
+  <div class="readings">{% for reading in result.readings %}<a href="{{ reading }}">{{ reading }}</a>{% endfor%}</div>
+  <div class="meanings">{% for meaning in result.meanings %}<a href="{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
+  <div>{{ result.literal }}</div>
+  <div>{{ result.codepoint }}</div>
+  <div>{{ result.radical }}</div>
+  <div>{{ result.strokeCount }}</div>
+  <div>{{ result.frequency }}</div>
+  <div>{{ result.jlpt }}</div>
+
+  {% if result.parents.length > 0 %}
+  <div class="parents">
+  {% for parent in result.parents %}
+    <span><a href="{{ parent }}">{{ parent }}</a></span>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if result.children.length > 0 %}
+  <div class="children">
+  {% for child in result.children %}
+    <span><a href="{{ child }}">{{ child }}</a></span>
+  {% endfor %}
+  </div>
+  {% endif %}
 
 </div>
 {% endif %}{% endfor %}
