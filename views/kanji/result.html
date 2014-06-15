@@ -20,7 +20,7 @@ a:hover {
   content: attr(data-count) ". ";
 }
 img {
-  width: 500px;
+  height: 70px;
 }
 </style>
 
@@ -28,7 +28,7 @@ img {
 {% if result == false %}<hr>{% else %}
 <div class="entry">
 
-  <img src="/images/kanji/{{ result.codepoint }}.svg">
+  <img src="/images/kanji/{{ result.codepoint.substring(0,2) }}/{{ result.codepoint }}.svg">
 
   <div class="readings">{% for reading in result.readings %}<a href="{{ reading }}">{{ reading }}</a>{% endfor%}</div>
   <div class="meanings">{% for meaning in result.meanings %}<a href="{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
