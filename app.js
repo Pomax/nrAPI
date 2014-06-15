@@ -1,4 +1,5 @@
-var app = require('express')(),
+var express = require('express'),
+    app = express(),
     nunjucksEnv = (function() {
       var ime = require("./lib/IME");
       var nunjucks = require('nunjucks');
