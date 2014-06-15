@@ -24,15 +24,8 @@ a:hover {
 {% for result in results %}
 {% if result == false %}<hr>{% else %}
 <div class="entry">
-<!--
-  <div class="reb">{% for reb in result.reb %}<a href="{{ reb }}">{{ reb }}</a>{% endfor %}</div>
-  <div class="keb">{% for keb in result.keb %}<a href="{{ keb }}">{{ keb }}</a>{% endfor %}</div>
-  {% for sense in result.sense %}<div class="sense" data-count="{{ loop.index }}">{% for gloss in sense.gloss %}
-    <a href="{{ gloss }}">{{ gloss }}</a>
-  {% endfor %}</div>
-  {% endfor %}
--->
 
+  <img src="images/kanji/{{ result.codepoint }}.svg">
   <div class="readings">{% for reading in result.readings %}<a href="{{ reading }}">{{ reading }}</a>{% endfor%}</div>
   <div class="meanings">{% for meaning in result.meanings %}<a href="{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
   <div>{{ result.literal }}</div>
