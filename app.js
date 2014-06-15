@@ -1,5 +1,14 @@
 var app = require('express')(),
-    nunjucks = require('nunjucks').configure('views', { autoescape: true, express: app }),
+    nunjucksEnv = (function() {
+      var ime = require("./lib/IME");
+      var nunjucks = require('nunjucks');
+      // for some reason I cannot refactor this to live in a file in ./lib
+      var loader = new nunjucks.FileSystemLoader('views');
+      var env = new nunjucks.Environment( loader, { autoescape: true } );
+      env.express(app);
+      env.addFilter("romanise", function(value) { return ime.romanise(value); });
+      return env;
+    }()),
     models = require('./lib/models')(require('sequelize')),
     parameters = require("./routes/parameters")(app)("dict", "id", "term"),
     routes = require("./routes")(require("./lib/datahandler")(models));

@@ -10,7 +10,8 @@ a:hover {
   background: #F8F8FA;
   padding: 10px;
 }
-.entry a + a:before {
+.entry a + a:before,
+.entry ruby + ruby:before {
   content: ",  ";
 }
 .entry + .entry {
@@ -24,7 +25,7 @@ a:hover {
 {% for result in results %}
 {% if result == false %}<hr>{% else %}
 <div class="entry">
-  <div class="reb">{% for reb in result.reb %}<a href="{{ reb }}">{{ reb }}</a>{% endfor %}</div>
+  <div class="reb">{% for reb in result.reb %}<ruby><rb><a href="{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
   <div class="keb">{% for keb in result.keb %}<a href="{{ keb }}">{{ keb }}</a>{% endfor %}</div>
   {% for sense in result.sense %}<div class="sense" data-count="{{ loop.index }}">{% for gloss in sense.gloss %}
     <a href="{{ gloss }}">{{ gloss }}</a>
