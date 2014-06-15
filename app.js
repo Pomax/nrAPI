@@ -13,6 +13,8 @@ var app = require('express')(),
     parameters = require("./routes/parameters")(app)("dict", "id", "term"),
     routes = require("./routes")(require("./lib/datahandler")(models));
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/',           routes.index);
 app.get('/:dict/entry/:id',  routes.entry);
 app.get('/:dict/find/:term', routes.find);
