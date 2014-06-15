@@ -6,7 +6,7 @@ module.exports = function(dataHandler) {
     entry: function(req, res) {
       dataHandler.getHandler(req.dict).findEntry(req.id, function(err, result) {
         if(err) {
-          return res.json({ error: err });
+          return res.render("err.html", { error: err });
         }
         res.json(result);
       });
@@ -14,15 +14,18 @@ module.exports = function(dataHandler) {
     find: function(req, res, next) {
       dataHandler.getHandler(req.dict).findAll(req.term, function(err, results) {
         if(err) {
-          return res.json({ error: err });
+          return res.render("err.html", { error: err });
         }
         res.json(results);
       });
     },
     show: function(req, res) {
+      if (req.query.details) {
+        res.locals.details = req.query.details;
+      }
       dataHandler.getHandler(req.dict).findAll(req.term, function(err, results) {
         if(err) {
-          return res.json({ error: err });
+          return res.render("err.html", { error: err });
         }
         res.render(req.dict + "/result.html", { results: results });
       });

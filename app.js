@@ -16,7 +16,7 @@ var express = require('express'),
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/',           routes.index);
+app.get('/',                 routes.index);
 app.get('/:dict/entry/:id',  routes.entry);
 app.get('/:dict/find/:term', routes.find);
 app.get('/:dict/show/:term', routes.show);

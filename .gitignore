@@ -7,3 +7,5 @@ data/node_modules
 **/*.xml
 **/res.json
 **/database.sql
+
+public/images/kanji

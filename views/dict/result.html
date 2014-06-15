@@ -14,11 +14,29 @@ a:hover {
 .entry ruby + ruby:before {
   content: ",  ";
 }
+.entry .keb a + a:before {
+  content: "";
+}
+
+.kebs span + span:before {
+  content: ", ";
+}
+
 .entry + .entry {
   margin-top: 1em;
 }
 .sense:before {
   content: attr(data-count) ". ";
+}
+
+iframe {
+  position: fixed;
+  right: 2px;
+  top: 0;
+  bottom: 0;
+  width: 620px;
+  border: none;
+  height: 100%;
 }
 </style>
 
@@ -26,10 +44,27 @@ a:hover {
 {% if result == false %}<hr>{% else %}
 <div class="entry">
   <div class="reb">{% for reb in result.reb %}<ruby><rb><a href="{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
-  <div class="keb">{% for keb in result.keb %}<a href="{{ keb }}">{{ keb }}</a>{% endfor %}</div>
+  <div class="kebs">{% for keb in result.keb %}<span class="keb">{% for kanji in keb %}<a href="../../kanji/show/{{ kanji }}" target="kanjiframe" data-kanji="{{ kanji }}">{{ kanji }}</a>{% endfor %}</span>{% endfor %}</div>
   {% for sense in result.sense %}<div class="sense" data-count="{{ loop.index }}">{% for gloss in sense.gloss %}
     <a href="{{ gloss }}">{{ gloss }}</a>
   {% endfor %}</div>
   {% endfor %}
 </div>
 {% endif %}{% endfor %}
+
+<iframe class="kanji" name="kanjiframe" src="{% if details %}../../kanji/show/{{ details }}{% endif %}"></iframe>
+
+<script>
+var as = document.querySelectorAll("a[data-kanji]");
+as = Array.prototype.slice.call(as);
+var highlight = [];
+as.forEach(function(a) {
+  var dk = a.getAttribute("data-kanji");
+  a.onclick = function() {
+    var elements = document.querySelectorAll("a[data-kanji="+dk+"]");
+    highlight.forEach(function(a) { a.style.color = ''; });
+    highlight = Array.prototype.slice.call(elements);
+    highlight.forEach(function(a) { a.style.color = "red"; });
+  }
+});
+</script>
