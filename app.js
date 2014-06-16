@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     nunjucksEnv = (function() {
-      var ime = require("./lib/IME");
+      var ime = require("jp-conversion");
       var nunjucks = require('nunjucks');
       // for some reason I cannot refactor this to live in a file in ./lib
       var loader = new nunjucks.FileSystemLoader('views');

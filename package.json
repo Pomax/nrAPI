@@ -9,6 +9,7 @@
     "mysql": "~2.3.2",
     "sax": "*",
     "sequelize": "~1.7.8",
-    "kanji-relations": "0.0.1"
+    "kanji-relations": "0.0.1",
+    "jp-conversion": "0.0.2"
   }
 }
