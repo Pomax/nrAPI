@@ -1,15 +1,16 @@
 {
   "author": "Pomax",
-  "title": "JMDict-to-SQL",
+  "title": "nrAPI",
   "version": "0.0.1",
   "dependencies": {
+    "express": "4.4.*",
+    "jp-conversion": "0.0.*",
+    "jp-giongo": "0.0.*",
+    "kanji-relations": "0.0.*",
     "lazy": "*",
-    "express": "~4.4.1",
-    "nunjucks": "~1.0.5",
-    "mysql": "~2.3.2",
+    "mysql": "2.3.*",
+    "nunjucks": "1.0.*",
     "sax": "*",
-    "sequelize": "~1.7.8",
-    "kanji-relations": "0.0.1",
-    "jp-conversion": "0.0.2"
+    "sequelize": "1.7.*"
   }
 }

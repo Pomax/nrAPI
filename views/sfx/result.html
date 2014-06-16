@@ -1,0 +1,40 @@
+<style>
+a, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(0,0,200);
+}
+.entry {
+  background: #F8F8FA;
+  padding: 10px;
+  border: 1px solid black;
+}
+.entry a + a:before {
+  content: ",  ";
+}
+.entry + .entry {
+  margin-top: 1em;
+}
+.category:before {
+  content:  attr(data-category);
+  font-weight: bold;
+}
+.meaning {
+  margin-left: 1em;
+}
+</style>
+{% for name, entry in results %}
+<div class="entry">
+  <div class="name"><ruby><rb>{{ name }}</rb><rt>{{ name | romanise }}</rt></ruby></div>
+  <hr>
+  {% for category, meanings in entry %}
+  <div class="category" data-category="{{ category }}">
+  {% for meaning in meanings %}
+  <div class="meaning">{{ meaning }}</div>
+  {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endfor %}

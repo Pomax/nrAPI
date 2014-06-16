@@ -11,7 +11,7 @@ var express = require('express'),
       return env;
     }()),
     models = require('./lib/models')(require('sequelize')),
-    parameters = require("./routes/parameters")(app)("dict", "id", "term"),
+    parameters = require("./routes/parameters")(app),
     routes = require("./routes")(require("./lib/datahandler")(models));
 
 app.use(express.static(__dirname + '/public'));
