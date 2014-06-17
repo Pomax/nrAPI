@@ -1,0 +1,63 @@
+<style>
+a, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(0,0,200);
+}
+.entry {
+  background: #F8F8FA;
+  padding: 10px;
+}
+.entry a + a:before,
+.entry ruby + ruby:before {
+  content: ",  ";
+}
+.entry .keb a + a:before {
+  content: "";
+}
+
+.kebs span + span:before {
+  content: ", ";
+}
+
+.entry + .entry {
+  margin-top: 1em;
+}
+.sense:before {
+  content: attr(data-type) ": ";
+  font-weight: bold;
+}
+
+iframe {
+  position: fixed;
+  right: 2px;
+  top: 0;
+  bottom: 0;
+  width: 620px;
+  border: none;
+  height: 100%;
+}
+</style>
+
+{% for result in results %}
+{% if result == false %}<hr>{% else %}
+<div class="entry">
+  <div class="reb">{% for reb in result.readings %}<ruby><rb><a href="{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
+  <div class="kebs">{% for keb in result.kanji %}<span class="keb">{% for kanji in keb %}<a href="../../kanji/show/{{ kanji }}" target="kanjiframe" data-kanji="{{ kanji }}">{{ kanji }}</a>{% endfor %}</span>{% endfor %}</div>
+  {% for sense in result.trans %}<hr>
+  <div class="sense" data-type="{{ sense.nameType}}">
+  {% for trans in sense.trans %}<span>{{ trans }}</span>{% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}{% endfor %}
+
+<script>
+var as = document.querySelectorAll("*[data-type=unclass]");
+as = Array.prototype.slice.call(as);
+as.forEach(function(a) {
+  a.setAttribute("data-type", "unclassified");
+});
+</script>

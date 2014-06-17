@@ -1,24 +1,86 @@
-<h1>node.js based REST api for Nihongo Resources data</h1>
+<style>
+  .examples {
+    margin: 0.5em 0 0 1em;
+  }
+  .examples:before {
+    font-weight: bold;
+    content: "examples: ";
+  }
+  .examples a, .examples a:visited {
+    color: #0000AA;
+  }
+  .examples a {
+    text-decoration: none;
+  }
+  .examples a + a:before {
+    content: ", ";
+  }
+</style>
 
-<p>Search for something (english, roma-ji, hiragana, katakana, or kanji form)</p>
-<input type="text" placeholder="type something">
-<input type="submit" value="show"> (html)
-<input type="submit" value="find"> (json)
+<h1>node.js based REST API for Nihongo Resources data</h1>
+
+<p>Search for something (english, romaji, hiragana, katakana, or kanji form is autodetected).</p>
+
+<formset class="dict">
+  <h3>Dictionary search:</h3>
+  <input type="text" placeholder="type something">
+  <input type="submit" value="json">
+  <input type="submit" value="html">
+  <div class="examples"><a>lion</a><a>shiawase</a><a>マクド</a><a>おおぜい</a><a>新聞</a></div>
+</formset>
+
+<formset class="kanji">
+  <h3>Kanji search:</h3>
+  <input type="text" placeholder="type something">
+  <input type="submit" value="json">
+  <input type="submit" value="html">
+  <div class="examples"><a>新</a><a>聞</a></div>
+</formset>
+
+<formset class="sfx">
+  <h3>Giongo (sound effects) and gitaigo (state descriptor) search:</h3>
+  <input type="text" placeholder="type something">
+  <input type="submit" value="json">
+  <input type="submit" value="html">
+  <div class="examples"><a>splash</a><a>ドキ</a><a>ぴし</a></div>
+</formset>
+
+<formset class="name">
+  <h3>Japanese names search:</h3>
+  <input type="text" placeholder="type something">
+  <input type="submit" value="json">
+  <input type="submit" value="html">
+  <div class="examples"><a>Tokyo</a><a>カヲル</a><a>まつもと</a><a>奈良</a></div>
+</formset>
+
 <script>
-  var input = document.querySelector("input[type=text]");
-  var html = document.querySelector("input[value=show]");
-  var json = document.querySelector("input[value=find]");
+  var formsets = document.querySelectorAll("formset");
+  formsets = Array.prototype.slice.call(formsets);
 
-  function find(rest) {
-    window.location = "/dict/" + rest + "/" + input.value;
-  };
+  formsets.forEach(function(set) {
+    var type = set.getAttribute("class");
 
-  html.onclick = function() { find("show"); };
-  json.onclick = function() { find("find"); };
+    var input = set.querySelector("input[type=text]");
+    var json  = set.querySelector("input[value=json]");
+    var html  = set.querySelector("input[value=html]");
 
-  input.onkeydown = function(evt) {
-    if(evt.which === 13 || evt.which === 10) {
-      find("show");
-    }
-  };
+    function find(rest) {
+      window.location = "/" + type + "/" + rest + "/" + input.value;
+    };
+
+    html.onclick = function() { find("show"); };
+    json.onclick = function() { find("find"); };
+
+    input.onkeydown = function(evt) {
+      if(evt.which === 13 || evt.which === 10) {
+        find("show");
+      }
+    };
+
+    var examples = set.querySelectorAll(".examples a");
+    examples = Array.prototype.slice.call(examples);
+    examples.forEach(function(a) {
+      a.href = type + "/show/" + a.innerHTML;
+    });
+  });
 </script>
