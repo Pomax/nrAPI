@@ -38,6 +38,26 @@ iframe {
   border: none;
   height: 100%;
 }
+
+.clearframe {
+  position: fixed;
+  top: 16px;
+  right: 15px;
+  height: 20px;
+  color: black;
+  z-index: 100;
+  cursor: pointer;
+  font-family: monospace;
+  border: 1px solid black;
+  border-radius: 17px;
+  padding: 0;
+  display: block;
+  margin: 0;
+  line-height: 12px;
+  height: 12px;
+  width: 12px;
+  text-indent: 2px;
+}
 </style>
 
 {% for result in results %}
@@ -53,18 +73,4 @@ iframe {
 {% endif %}{% endfor %}
 
 <iframe class="kanji" name="kanjiframe" src="{% if details %}../../kanji/show/{{ details }}{% endif %}"></iframe>
-
-<script>
-var as = document.querySelectorAll("a[data-kanji]");
-as = Array.prototype.slice.call(as);
-var highlight = [];
-as.forEach(function(a) {
-  var dk = a.getAttribute("data-kanji");
-  a.onclick = function() {
-    var elements = document.querySelectorAll("a[data-kanji="+dk+"]");
-    highlight.forEach(function(a) { a.style.color = ''; });
-    highlight = Array.prototype.slice.call(elements);
-    highlight.forEach(function(a) { a.style.color = "red"; });
-  }
-});
-</script>
+<script src="/javascript/klink.js"></script>

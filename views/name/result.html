@@ -39,6 +39,26 @@ iframe {
   border: none;
   height: 100%;
 }
+
+.clearframe {
+  position: fixed;
+  top: 16px;
+  right: 15px;
+  height: 20px;
+  color: black;
+  z-index: 100;
+  cursor: pointer;
+  font-family: monospace;
+  border: 1px solid black;
+  border-radius: 17px;
+  padding: 0;
+  display: block;
+  margin: 0;
+  line-height: 12px;
+  height: 12px;
+  width: 12px;
+  text-indent: 2px;
+}
 </style>
 
 {% for result in results %}
@@ -53,6 +73,9 @@ iframe {
   {% endfor %}
 </div>
 {% endif %}{% endfor %}
+
+<iframe class="kanji" name="kanjiframe" src="{% if details %}../../kanji/show/{{ details }}{% endif %}"></iframe>
+<script src="/javascript/klink.js"></script>
 
 <script>
 var as = document.querySelectorAll("*[data-type=unclass]");
