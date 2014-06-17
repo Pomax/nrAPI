@@ -5,7 +5,7 @@ Searching currently allows for three routes:
 
 >  /:context/entry/:id
 
-to get an entry's JSON readout by primary identifier (this value is *context* dependent)
+to get an entry's JSON readout by primary identifier (this value is `context` dependent)
 
 >  /:context/find/:term
 
@@ -15,7 +15,7 @@ performs a search for all entries matching that term (language autodetected) and
 
 same as find, but returns styled and out-linking HTML for easy inspection.
 
-Available *context*s are:
+Available `context`s are:
 
 1. `dict` for the jp <-> en dictionary
 2. `kanji` for the kanji dictionary
