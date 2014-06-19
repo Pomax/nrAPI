@@ -1,4 +1,7 @@
 <style>
+  body > p {
+    text-align: justify;
+  }
   .examples {
     margin: 0.5em 0 0 1em;
   }
@@ -29,9 +32,15 @@
   }
 </style>
 
-<h1>node.js based REST API for Nihongo Resources data</h1>
+<h1>A node.js based REST API for Nihongo Resources data</h1>
 
-<p>Search for something (english, romaji, hiragana, katakana, or kanji form is autodetected).</p>
+<p>This is a demonstrator page that uses the API hosted on this domain for searching through
+<a href="http://www.edrdg.org/jmdict/j_jmdict.html">JMDict</a>, <a href="http://www.csse.monash.edu.au/~jwb/kanjidic2/">KANJIDIC2</a>,
+<a href="http://www.csse.monash.edu.au/~jwb/enamdict_doc.html">JMNedict</a> and the nihongoresources giongo/gitaigo data.
+Searches use the same API routes that external services would use to get data (for demonstrator purposes, this page
+consumes the <code>html</code> routes, to get fully formatted search results). Search for something (english, romaji,
+hiragana, katakana, or kanji form is autodetected) to see the search results on the right. For dictionary and names
+dictionary data, the filters at the top of the page do meaningful things. For kanji and giongo/gitaigo, they don't.</p>
 
 <div id="searchboxes">
   <formset class="dict">
