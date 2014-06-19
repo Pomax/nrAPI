@@ -13,7 +13,8 @@
     "sax": "*",
     "sequelize": "1.7.*",
     "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.10.0"
+    "grunt-contrib-jshint": "^0.10.0",
+    "jp-conjugation": "0.0.2"
   },
   "scripts": {
     "test": "grunt"

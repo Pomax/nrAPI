@@ -65,12 +65,19 @@ iframe {
 <div class="entry">
   <div class="reb">{% for reb in result.reb %}<ruby><rb><a href="{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
   <div class="kebs">{% for keb in result.keb %}<span class="keb">{% for kanji in keb %}<a href="../../kanji/show/{{ kanji }}" target="kanjiframe" data-kanji="{{ kanji }}">{{ kanji }}</a>{% endfor %}</span>{% endfor %}</div>
-  {% for sense in result.sense %}<div class="sense" data-count="{{ loop.index }}">{% for gloss in sense.gloss %}
+  {% for sense in result.sense %}<div class="sense" data-count="{{ loop.index }}">
+  {% if sense.pos.join(',') %}({{ sense.pos.join(',') }}){% endif %}
+  {% for gloss in sense.gloss %}
     <a href="{{ gloss }}">{{ gloss }}</a>
-  {% endfor %}</div>
+  {% endfor %}
+  {% for pos in sense.pos %}
+    <input type="hidden" class="pos" value="{{ pos }}">
+  {% endfor %}  </div>
   {% endfor %}
 </div>
 {% endif %}{% endfor %}
 
+<!--
 <iframe class="kanji" name="kanjiframe" src="{% if details %}../../kanji/show/{{ details }}{% endif %}"></iframe>
 <script src="/javascript/klink.js"></script>
+-->

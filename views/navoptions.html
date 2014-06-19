@@ -1,0 +1,170 @@
+
+<style>
+  #filters {
+    margin: 1em 0 0 1em;
+  }
+  #filters > * {
+    border-bottom: 1px solid grey;
+  }
+  #filters > * + * {
+    margin-left: 0.5em;
+  }
+</style>
+
+<div id="filters">
+  <span>
+    <input type="checkbox" id="romaji" checked onchange="setRomaji(this)"><label for="romaji">romanise</label>
+  </span>
+  <label for="sorting">sort on:</label><select id="sorting" onchange="setSorting(this)">
+    <option name="kana" value="kana">kana</option>
+    <option name="kanji" value="kanji">kanji</option>
+    <option name="nothing" value="nothing">nothing</option>
+  </select>
+  <label for="ascdesc">sort order:</label><select id="ascdesc" onchange="setSortOrder(this)">
+    <option name="asc" value="asc">ascending</option>
+    <option name="desc" value="desc">descending</option>
+  </select>
+  <label for="postype">show:</label><select id="postype" onchange="setPosType(this)">
+    <option value="all">all words</option>
+    <option value="v">├ verbs</option>
+    <option value="vu">├ ├ う-verbs</option>
+    <option value="vru">├ └ る-verbs</option>
+    <option value="n">├ nouns</option>
+    <option value="adj">├ adjectives</option>
+    <option value="i-adj">├ ├ い-adjectives</option>
+    <option value="na-adj"> ├ └ な-adjectives</option>
+    <option value="adv">├ adverbs</option>
+    <option value="exp">└ expressions</option>
+  </select>
+</div>
+
+<script>
+  var config = localStorage.getItem("nrapiConfig") ? JSON.parse(localStorage["nrapiConfig"]) : {
+    romaji: true,
+    sorting: "kana",
+    sortorder: "asc", // true = asc, false = desc
+    revsort: false,  // true = reverse string sort, false=plain sort
+    postype: "all",
+    useFilters: false
+  };
+
+  // ------------------------
+
+  var rom = document.querySelector("#romaji");
+  if(config.romaji) { rom.setAttribute("checked", "checked"); }
+  else { rom.checked = false; rom.removeAttribute("checked"); }
+
+  var sorting = document.querySelector("#sorting");
+  Array.prototype.slice.call(sorting.options).forEach(function(option, idx) {
+    if(option.value !== config.sorting) {
+      option.removeAttribute("selected");
+    } else { option.setAttribute("selected", "selected"); }
+  });
+
+  var ascdesc = document.querySelector("#ascdesc");
+  Array.prototype.slice.call(ascdesc.options).forEach(function(option, idx) {
+    if(option.value !== config.sortorder) {
+      option.removeAttribute("selected");
+    } else { option.setAttribute("selected", "selected"); }
+  });
+
+  var postype = document.querySelector("#postype");
+  Array.prototype.slice.call(postype.options).forEach(function(option, idx) {
+    if(option.value !== config.postype) {
+      option.removeAttribute("selected");
+    } else { option.setAttribute("selected", "selected"); }
+  });
+
+  // ------------------------
+
+  function getStrokeCount(kanji) {
+    if(!kanji) return -1;
+    return kanji.charCodeAt(0);
+  }
+
+  var sorting = {
+    kana: function(a,b) {
+      a = a.querySelector(".reb a").innerHTML;
+      b = b.querySelector(".reb a").innerHTML;
+      return a < b ? -1 : a > b ? 1 : 0;
+    },
+    kanji: function(a,b) {
+      a = a.querySelector(".keb a");
+      b = b.querySelector(".keb a");
+      a = getStrokeCount(a ? a.innerHTML : false);
+      b = getStrokeCount(b ? b.innerHTML : false);
+      // we actually want to sort on stroke order first,
+      // rather than just plain u icode ordering.
+      return a < b ? -1 : a > b ? 1 : 0;
+    },
+    nothing: function(a,b) {
+      return 0;
+    }
+  }
+
+  function rerender() {
+    localStorage["nrapiConfig"] = JSON.stringify(config);
+
+    var results = document.querySelector("#results");
+    var children = Array.prototype.slice.call(document.querySelectorAll("#results > div"));
+
+    // result filtering?
+    if (config.useFilters) {
+      // sort based on config
+      var resorted = false;
+      if(config.sorting) {
+        resorted = true;
+        children.sort(sorting[config.sorting]);
+        if(config.sortorder === "desc") {
+          children = children.reverse();
+        }
+      }
+
+      children.forEach(function(child) {
+        if (resorted) results.appendChild(child);
+        // toggle styles based on config
+        if(config.postype!=="all") {
+          matched = false;
+          Array.prototype.slice.call(child.querySelectorAll("input[class=pos]")).forEach(function(pos) {
+            if(pos.value.indexOf(config.postype) > -1)
+              matched = true;
+          });
+          child.style.display = matched ? "block" : "none";
+        } else { child.style.display = "block"; }
+      });
+    }
+
+    // global style toggle
+    Array.prototype.slice.call(document.querySelectorAll("rt")).forEach(function(rt) {
+      rt.style.display = config.romaji ? "block" : "none";
+    });
+  }
+
+  function useFilters(v) {
+    config.useFilters = v;
+    rerender();
+  }
+
+  function setRomaji(input) {
+    config.romaji = !!input.checked;
+    rerender();
+  }
+
+  function setSorting(select) {
+    var option = select.options[select.selectedIndex].value;
+    config.sorting = option;
+    rerender();
+  }
+
+  function setSortOrder(select) {
+    var option = select.options[select.selectedIndex].value;
+    config.sortorder = option;
+    rerender();
+  }
+
+  function setPosType(select) {
+    var option = select.options[select.selectedIndex].value;
+    config.postype = option;
+    rerender();
+  }
+</script>
