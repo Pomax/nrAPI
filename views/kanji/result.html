@@ -38,10 +38,10 @@ a:hover {
 
   <img src="/images/kanji/{{ result.codepoint.substring(0,2) }}/{{ result.codepoint }}.svg">
 
-  <div class="keb">literal: <a href="../../dict/show/{{ result.literal }}?details={{ result.literal }}">{{ result.literal }}</a></div>
+  <div class="keb">literal: <a href="/dict/show/{{ result.literal }}?details={{ result.literal }}">{{ result.literal }}</a></div>
   <div>radical: {{ result.radical }}</div>
-  <div class="reb">readings: {% for reading in result.readings %}<a href="../../dict/show/{{ reading }}">{{ reading }}</a>{% endfor%}</div>
-  <div class="meanings">meanings: {% for meaning in result.meanings %}<a href="../../dict/show/{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
+  <div class="reb">readings: {% for reading in result.readings %}<a href="/dict/show/{{ reading }}">{{ reading }}</a>{% endfor%}</div>
+  <div class="meanings">meanings: {% for meaning in result.meanings %}<a href="/dict/show/{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
 
   <hr>
 
@@ -55,7 +55,7 @@ a:hover {
   {% if result.parents.length > 0 %}
   <div class="parents"> composed of:
   {% for parent in result.parents %}
-    <span><a target="_self" href="{{ parent }}">{{ parent }}</a></span>
+    <span><a target="_self" href="/kanji/show/{{ parent }}">{{ parent }}</a></span>
   {% endfor %}
   </div>
   {% endif %}
@@ -63,7 +63,7 @@ a:hover {
   {% if result.children.length > 0 %}
   <div class="children"> generates:
   {% for child in result.children %}
-    <span><a target="_self" href="{{ child }}">{{ child }}</a></span>
+    <span><a target="_self" href="/kanji/show/{{ child }}">{{ child }}</a></span>
   {% endfor %}
   </div>
   {% endif %}

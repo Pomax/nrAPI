@@ -32,7 +32,7 @@ a:hover {
   {% for category, meanings in entry %}
   <div class="category" data-category="{{ category }}">
   {% for meaning in meanings %}
-  <div class="meaning">{{ meaning }}</div>
+  <div class="meaning">{% for eng in meaning.split(',') %}<a href="/dict/show/{{eng}}">{{ eng }}</a>{% endfor %}</div>
   {% endfor %}
   </div>
   {% endfor %}

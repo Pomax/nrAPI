@@ -64,8 +64,8 @@ iframe {
 {% for result in results %}
 {% if result == false %}<hr>{% else %}
 <div class="entry">
-  <div class="reb">{% for reb in result.readings %}<ruby><rb><a href="{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
-  <div class="kebs">{% for keb in result.kanji %}<span class="keb">{% for kanji in keb %}<a href="../../kanji/show/{{ kanji }}" target="kanjiframe" data-kanji="{{ kanji }}">{{ kanji }}</a>{% endfor %}</span>{% endfor %}</div>
+  <div class="reb">{% for reb in result.readings %}<ruby><rb><a href="/dict/show/{{ reb }}">{{ reb }}</a></rb><rt>{{ reb | romanise }}</rt></ruby>{% endfor %}</div>
+  <div class="kebs">{% for keb in result.kanji %}<span class="keb">{% for kanji in keb %}<a href="/kanji/show/{{ kanji }}" target="kanjiframe" data-kanji="{{ kanji }}">{{ kanji }}</a>{% endfor %}</span>{% endfor %}</div>
   {% for sense in result.trans %}<hr>
   <div class="sense" data-type="{{ sense.nameType}}">
   {% for trans in sense.trans %}<span>{{ trans }}</span>{% endfor %}

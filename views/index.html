@@ -59,7 +59,7 @@ form for giongo/gitaigo, which has no kanji form, is fairly meaningless.</p>
 <div id="searchboxes">
   <formset class="dict">
     <h3>Dictionary search:</h3>
-    <input type="text" placeholder="type something">
+    <input type="text" placeholder="type something" id="jpensearch">
     <input type="submit" value="json">
     <input type="submit" value="html">
     <div class="examples"><a>lion</a><a>shiawase</a><a>マクド</a><a>おおぜい</a><a>新聞</a></div>
@@ -125,10 +125,26 @@ form for giongo/gitaigo, which has no kanji form, is fairly meaningless.</p>
       if (typeof data !== "string") {
         data = JSON.stringify(data,null,2).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
       }
-      document.querySelector("#results").innerHTML = data;
+      var results = document.querySelector("#results")
+      results.innerHTML = data;
       rerender();
+
+      // reroute <a> to JS links
+      var as = results.querySelectorAll("a");
+      as = Array.prototype.slice.call(as);
+      as.forEach(function(a) {
+        var r = a.href.split('/').slice(-3);
+        a.href="javascript:jpenlookups('"+r[2]+"','"+r[0]+"','"+r[1]+"')";
+      });
+
+      history.pushState(null, type + " search for " + input, url);
     });
   };
+
+  var jpenlookups = function(input, type, method) {
+    document.getElementById('jpensearch').value = input;
+    lookups({value:input}, type, method);
+  }
 
   var formsets = document.querySelectorAll("formset");
   formsets = Array.prototype.slice.call(formsets);
