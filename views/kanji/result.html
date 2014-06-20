@@ -38,9 +38,9 @@ a:hover {
 
   <img src="/images/kanji/{{ result.codepoint.substring(0,2) }}/{{ result.codepoint }}.svg">
 
-  <div>literal: <a href="../../dict/show/{{ result.literal }}?details={{ result.literal }}">{{ result.literal }}</a></div>
+  <div class="keb">literal: <a href="../../dict/show/{{ result.literal }}?details={{ result.literal }}">{{ result.literal }}</a></div>
   <div>radical: {{ result.radical }}</div>
-  <div class="readings">readings: {% for reading in result.readings %}<a href="../../dict/show/{{ reading }}">{{ reading }}</a>{% endfor%}</div>
+  <div class="reb">readings: {% for reading in result.readings %}<a href="../../dict/show/{{ reading }}">{{ reading }}</a>{% endfor%}</div>
   <div class="meanings">meanings: {% for meaning in result.meanings %}<a href="../../dict/show/{{ meaning }}">{{ meaning }}</a>{% endfor%}</div>
 
   <hr>
