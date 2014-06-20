@@ -39,8 +39,9 @@
 <a href="http://www.csse.monash.edu.au/~jwb/enamdict_doc.html">JMNedict</a> and the nihongoresources giongo/gitaigo data.
 Searches use the same API routes that external services would use to get data (for demonstrator purposes, this page
 consumes the <code>html</code> routes, to get fully formatted search results). Search for something (english, romaji,
-hiragana, katakana, or kanji form is autodetected) to see the search results on the right. For dictionary and names
-dictionary data, the filters at the top of the page do meaningful things. For kanji and giongo/gitaigo, they don't.</p>
+hiragana, katakana, or kanji form is autodetected) to see the search results on the right. The fitler options don't
+work for everything; filtering word type in the kanji results won't do anything, for instance, and sorting on kanji
+form for giongo/gitaigo, which has no kanji form, is fairly meaningless.</p>
 
 <div id="searchboxes">
   <formset class="dict">
@@ -113,7 +114,7 @@ dictionary data, the filters at the top of the page do meaningful things. For ka
         data = JSON.stringify(data,null,2).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
       }
       document.querySelector("#results").innerHTML = data;
-      useFilters(["kanji", "sfx"].indexOf(type) === -1);
+      rerender();
     });
   };
 

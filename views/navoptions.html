@@ -44,8 +44,7 @@
     sorting: "kana",
     sortorder: "asc", // true = asc, false = desc
     revsort: false,  // true = reverse string sort, false=plain sort
-    postype: "all",
-    useFilters: false
+    postype: "all"
   };
 
   // ------------------------
@@ -108,41 +107,33 @@
     var results = document.querySelector("#results");
     var children = Array.prototype.slice.call(document.querySelectorAll("#results > div"));
 
-    // result filtering?
-    if (config.useFilters) {
-      // sort based on config
-      var resorted = false;
-      if(config.sorting) {
-        resorted = true;
-        children.sort(sorting[config.sorting]);
-        if(config.sortorder === "desc") {
-          children = children.reverse();
-        }
+    // sort based on config
+    var resorted = false;
+    if(config.sorting) {
+      resorted = true;
+      children.sort(sorting[config.sorting]);
+      if(config.sortorder === "desc") {
+        children = children.reverse();
       }
-
-      children.forEach(function(child) {
-        if (resorted) results.appendChild(child);
-        // toggle styles based on config
-        if(config.postype!=="all") {
-          matched = false;
-          Array.prototype.slice.call(child.querySelectorAll("input[class=pos]")).forEach(function(pos) {
-            if(pos.value.indexOf(config.postype) > -1)
-              matched = true;
-          });
-          child.style.display = matched ? "block" : "none";
-        } else { child.style.display = "block"; }
-      });
     }
+
+    children.forEach(function(child) {
+      if (resorted) results.appendChild(child);
+      // toggle styles based on config
+      if(config.postype!=="all") {
+        matched = false;
+        Array.prototype.slice.call(child.querySelectorAll("input[class=pos]")).forEach(function(pos) {
+          if(pos.value.indexOf(config.postype) > -1)
+            matched = true;
+        });
+        child.style.display = matched ? "block" : "none";
+      } else { child.style.display = "block"; }
+    });
 
     // global style toggle
     Array.prototype.slice.call(document.querySelectorAll("rt")).forEach(function(rt) {
       rt.style.display = config.romaji ? "block" : "none";
     });
-  }
-
-  function useFilters(v) {
-    config.useFilters = v;
-    rerender();
   }
 
   function setRomaji(input) {
