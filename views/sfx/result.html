@@ -26,7 +26,7 @@ a:hover {
 }
 </style>
 {% for name, entry in results %}
-<div class="entry">
+<div class="entry sfx">
   <div class="reb"><ruby><rb><a href="/dict/show/{{name}}">{{ name }}</a></rb><rt>{{ name | romanise }}</rt></ruby></div>
   <hr>
   {% for category, meanings in entry %}

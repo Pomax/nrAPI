@@ -137,7 +137,7 @@ form for giongo/gitaigo, which has no kanji form, is fairly meaningless.</p>
         a.href="javascript:jpenlookups('"+r[2]+"','"+r[0]+"','"+r[1]+"')";
       });
 
-      history.pushState(null, type + " search for " + input, url);
+      history.pushState({ "timestamp": Date.now() }}, type + " search for " + input, url);
     });
   };
 
