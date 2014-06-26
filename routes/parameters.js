@@ -4,11 +4,9 @@ module.exports = function(app) {
     app.param(param, function(req, res, next, value) {
       req[param] = value;
       if(param === "dict") {
-        // CORS is based on the :dict parameter
-        res.header("Access-Control-Allow-Origin", [
-          "http://nihongoresources.com",
-          "http://api.nihongoresources.com"
-        ].join(' '));
+        if(req.host.match(/([^.]+\.)?nihongoresources\.com/)) {
+          res.header("Access-Control-Allow-Origin", req.host);
+        }
       }
       next();
     });
