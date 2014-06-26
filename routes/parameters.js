@@ -7,6 +7,8 @@ module.exports = function(app) {
         var origin = req.get('origin');
         if(origin.match(/([^.]+\.)?nihongoresources\.com/)) {
           res.header("Access-Control-Allow-Origin", origin);
+        } else {
+          res.header("Access-Control-Allow-Origin", "deny");
         }
       }
       next();
