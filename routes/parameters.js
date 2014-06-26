@@ -5,7 +5,7 @@ module.exports = function(app) {
       req[param] = value;
       if(param === "dict") {
         if(req.host.match(/([^.]+\.)?nihongoresources\.com/)) {
-          res.header("Access-Control-Allow-Origin", req.host);
+          res.header("Access-Control-Allow-Origin", req.protocol + "://" + req.host);
         }
       }
       next();
