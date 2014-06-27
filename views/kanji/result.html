@@ -1,30 +1,32 @@
 <style>
-a, a:visited, a:active {
+#nrapi a,
+#nrapi a:visited,
+#nrapi a:active {
   color: inherit;
   text-decoration: none;
 }
-a:hover {
+#nrapi a:hover {
   color: rgb(0,0,200);
 }
-.entry {
+#nrapi .entry {
   background: #F8F8FA;
   padding: 10px;
   border: 1px solid black;
 }
-.entry a + a:before,
-.entry span + span:before {
+#nrapi .entry a + a:before,
+#nrapi .entry span + span:before {
   content: ",  ";
 }
-.entry + .entry {
+#nrapi .entry + .entry {
   margin-top: 1em;
 }
-.sense:before {
+#nrapi .sense:before {
   content: attr(data-count) ". ";
 }
-#results img {
+#nrapi #results img {
   height: 70px;
 }
-#results h1 {
+#nrapi #results h1 {
   font-variant: small-caps;
   margin: 0 auto;
 }

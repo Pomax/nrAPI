@@ -1,62 +1,32 @@
 <style>
-a, a:visited, a:active {
+#nrapi a,
+#nrapi a:visited,
+#nrapi a:active {
   color: inherit;
   text-decoration: none;
 }
-a:hover {
+#nrapi a:hover {
   color: rgb(0,0,200);
 }
-.entry {
+#nrapi .entry {
   background: #F8F8FA;
   padding: 10px;
 }
-.entry a + a:before,
-.entry ruby + ruby:before {
+#nrapi .entry a + a:before,
+#nrapi .entry ruby + ruby:before {
   content: ",  ";
 }
-.entry .keb a + a:before {
+#nrapi .entry .keb a + a:before {
   content: "";
 }
-
-.kebs span + span:before {
+#nrapi .kebs span + span:before {
   content: ", ";
 }
-
-.entry + .entry {
+#nrapi .entry + .entry {
   margin-top: 1em;
 }
-.sense:before {
+#nrapi .sense:before {
   content: attr(data-count) ". ";
-}
-
-iframe {
-  position: fixed;
-  right: 2px;
-  top: 0;
-  bottom: 0;
-  width: 620px;
-  border: none;
-  height: 100%;
-}
-
-.clearframe {
-  position: fixed;
-  top: 16px;
-  right: 15px;
-  height: 20px;
-  color: black;
-  z-index: 100;
-  cursor: pointer;
-  font-family: monospace;
-  border: 1px solid black;
-  border-radius: 17px;
-  padding: 0;
-  display: block;
-  margin: 0;
-  line-height: 12px;
-  height: 12px;
-  width: 12px;
-  text-indent: 2px;
 }
 </style>
 
@@ -76,8 +46,3 @@ iframe {
   {% endfor %}
 </div>
 {% endif %}{% endfor %}
-
-<!--
-<iframe class="kanji" name="kanjiframe" src="{% if details %}../../kanji/show/{{ details }}{% endif %}"></iframe>
-<script src="/javascript/klink.js"></script>
--->
