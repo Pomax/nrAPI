@@ -121,7 +121,7 @@
     }
 
     var lookups = function(input, type, method) {
-      var url = "http://api.nihongoresources.com/" + type + "/" + method + "/" + input.value;
+      var url = "/" + type + "/" + method + "/" + input.value;
       open(url, function(data) {
         if (typeof data !== "string") {
           data = JSON.stringify(data,null,2).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
@@ -143,7 +143,7 @@
     };
 
     var jpenlookups = function(input, type, method) {
-      document.getElementById('jpensearch').value = input;
+      document.getElementById('jpensearch').value = decodeURI(input);
       lookups({value:input}, type, method);
     }
 
@@ -169,7 +169,7 @@
         var span = document.createElement("span");
         span.innerHTML = a.innerHTML;
         span.onclick = function() {
-          input.value = a.innerHTML;
+          input.value = decodeURI(a.innerHTML);
           lookup("show");
         };
         a.parentNode.replaceChild(span,a);
