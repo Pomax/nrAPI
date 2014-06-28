@@ -19,6 +19,14 @@
 
   app.use(express.static(__dirname + '/public'));
 
+  // general purpose error handler, so that the app doesn't crash
+  app.use(function(err, req, res, next){
+    var time = Date.now();
+    console.error(time);
+    console.error(err.stack);
+    res.send(500, "An error occurred during search. Log timestamp: " + time);
+  });
+
   app.get('/',                 routes.index);
   app.get('/:dict/entry/:id',  routes.entry);
   app.get('/:dict/find/:term', routes.find);
