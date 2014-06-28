@@ -127,8 +127,8 @@
           data = JSON.stringify(data,null,2).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
         }
         var results = document.querySelector("#results")
-        if (data.trim() == "") {
-          data = "No results found. You can try adding wildcards (* and ? are supported) before or after your search term."
+        if (method === "show" && data.indexOf("<div>") === -1) {
+          data = "<p>No results found. You can try adding wildcards (* and ? are supported) before or after your search term.</p>";
         }
         results.innerHTML = data;
         rerender();
