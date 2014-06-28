@@ -111,7 +111,7 @@
             data = JSON.parse(data);
             callback(data);
           } catch(e) {
-            if(data.indexOf("</div>") > -1) {
+            if(data.indexOf("</style>") > -1) {
               callback(data);
             } else { console.error("could not parse "+data); }
           }
