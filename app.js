@@ -22,7 +22,13 @@
   // general purpose error handler, so that the app doesn't crash
   app.use(function(err, req, res, next){
     var time = Date.now();
-    console.error(time);
+    console.error("error timestamp: " + time);
+    console.error("query parameters: " + (function() {
+      var s = req.id ? " " + req.id : '';
+      s += req.dict ? " " + req.dict : '';
+      s += req.term ? " " + req.test : '';
+      return s;
+    }()));
     console.error(err.stack);
     res.send(500, "An error occurred during search. Log timestamp: " + time);
   });
