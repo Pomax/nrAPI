@@ -18,6 +18,7 @@
   <label for="sorting">sort on:</label><select id="sorting" onchange="setSorting(this)">
     <option name="kana" value="kana">kana</option>
     <option name="kanji" value="kanji">kanji</option>
+    <option name="relevance (en)" value="relevance (en)">relevance (en)</option>
     <option name="nothing" value="nothing">nothing</option>
   </select>
   <label for="ascdesc">sort order:</label><select id="ascdesc" onchange="setSortOrder(this)">
@@ -95,6 +96,14 @@
       // we actually want to sort on stroke order first,
       // rather than just plain u icode ordering.
       return a < b ? -1 : a > b ? 1 : 0;
+    },
+    "relevance (en)": function(a,b) {
+      a = a.querySelector(".ranking");
+      b = b.querySelector(".ranking");
+      if(!a || !b) return this.kana(a,b);
+      a = parseFloat(a.value);
+      b = parseFloat(b.value);
+      return b - a;
     },
     nothing: function(a,b) {
       return 0;
