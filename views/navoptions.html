@@ -98,7 +98,7 @@
       return a < b ? -1 : a > b ? 1 : 0;
     },
     "relevance (en)": function(a,b) {
-      var c = a.querySelector(".ranking");
+      var c = a.querySelector(".ranking"),
           d = b.querySelector(".ranking");
       if(!c || !d) return sorting.kana(a,b);
       a = parseFloat(c.value);
