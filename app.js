@@ -1,7 +1,7 @@
 (function runApplication() {
   "use strict";
 
-  var compression = require('compression'),
+  var compress = require('compression'),
       express = require('express'),
       app = express(),
       nunjucksEnv = (function() {
