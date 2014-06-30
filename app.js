@@ -17,6 +17,7 @@
       parameters = require("./routes/parameters")(app),
       routes = require("./routes")(require("./lib/datahandler")(models));
 
+  app.use(express.compress());
   app.use(express.static(__dirname + '/public'));
 
   // general purpose error handler, so that the app doesn't crash
