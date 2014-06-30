@@ -98,11 +98,11 @@
       return a < b ? -1 : a > b ? 1 : 0;
     },
     "relevance (en)": function(a,b) {
-      a = a.querySelector(".ranking");
-      b = b.querySelector(".ranking");
-      if(!a || !b) return this.kana(a,b);
-      a = parseFloat(a.value);
-      b = parseFloat(b.value);
+      var c = a.querySelector(".ranking");
+          d = b.querySelector(".ranking");
+      if(!c || !d) return sorting.kana(a,b);
+      a = parseFloat(c.value);
+      b = parseFloat(d.value);
       return b - a;
     },
     nothing: function(a,b) {
