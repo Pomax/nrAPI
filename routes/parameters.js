@@ -7,8 +7,8 @@ module.exports = function(app) {
       req.params[param] = value;
       if(param === "dict") {
         var origin = req.get('origin');
-        if(origin && (origin.indexOf("http://localhost")===0 || origin.match(/([^.]+\.)?nihongoresources\.com/))) {
-          res.header("Access-Control-Allow-Origin", origin);
+        if(!origin  || (origin.indexOf("http://localhost")!==0 && !origin.match(/([^.]+\.)?nihongoresources\.com/))) {
+          res.removeHeader("Access-Control-Allow-Origin");
         }
       }
       next();
