@@ -1,0 +1,3 @@
+[submodule "public/projects/grammar"]
+	path = public/projects/grammar
+	url = git@github.com:Pomax/nrGrammar.git
