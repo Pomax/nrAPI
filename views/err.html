@@ -1,1 +1,15 @@
-<!-- {{ error }} -->
+<h1>An error occurred: {{ error }}</h1>
+
+<h2>parameters:</h2>
+<dl>
+{% for key,value in params %}
+  <dt>{{ key }}</dt><dd>{{ value }}</dd>
+{% endfor %}
+</dl>
+
+<h2>query arguments</h2>
+<dl>
+{% for key,value in query %}
+  <dt>{{ key }}</dt><dd>{{ value }}</dd>
+{% endfor %}
+</dl>

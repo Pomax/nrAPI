@@ -21,24 +21,13 @@
   app.use(compress());
   app.use(express.static(__dirname + '/public'));
 
-  // general purpose error handler, so that the app doesn't crash
-  app.use(function(err, req, res, next){
-    var time = Date.now();
-    console.error("error timestamp: " + time);
-    console.error("query parameters: " + (function() {
-      var s = req.id ? " " + req.id : '';
-      s += req.dict ? " " + req.dict : '';
-      s += req.term ? " " + req.test : '';
-      return s;
-    }()));
-    console.error(err.stack);
-    res.send(500, "An error occurred during search. Log timestamp: " + time);
-  });
-
   app.get('/',                 routes.index);
   app.get('/:dict/entry/:id',  routes.entry);
   app.get('/:dict/find/:term', routes.find);
   app.get('/:dict/show/:term', routes.show);
+
+  app.use(routes.errorLogger);
+  app.use(routes.errorHandler);
 
   var port = process.env.PORT || 8910;
   app.listen(port, function(err,res) {
