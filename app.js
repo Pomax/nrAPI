@@ -1,10 +1,20 @@
 (function runApplication() {
   "use strict";
 
+  // Basic app setup
   var compress = require('compression'),
       express = require('express'),
-      app = express(),
-      nunjucksEnv = (function() {
+      app = express();
+
+  app.use(compress());
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
+  app.use(express.static(__dirname + '/public'));
+
+  // Content related setup
+  var nunjucksEnv = (function() {
         var ime = require("jp-conversion");
         var nunjucks = require('nunjucks');
         // for some reason I cannot refactor this to live in a file in ./lib
@@ -14,12 +24,9 @@
         env.addFilter("romanise", function(value) { return ime.romanise(value); });
         return env;
       }()),
-      models = require('./lib/models')(require('sequelize')),
       parameters = require("./routes/parameters")(app),
+      models = require('./lib/models')(require('sequelize')),
       routes = require("./routes")(require("./lib/datahandler")(models));
-
-  app.use(compress());
-  app.use(express.static(__dirname + '/public'));
 
   app.get('/',                 routes.index);
   app.get('/:dict/entry/:id',  routes.entry);
