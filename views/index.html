@@ -31,6 +31,11 @@
       vertical-align: top;
       width: 48%;
     }
+    #footercontent {
+     position: absolute;
+     bottom: 0;
+     font-size: 80%;
+    }
     @media screen and (max-width: 767px) {
       #searchboxes, #preview {
         display: block;
@@ -100,6 +105,15 @@
   <div id="preview">
     {% include "navoptions.html" %}
     <div id="results"></div>
+  </div>
+
+  <div id="footercontent">Jp/En dictionary information is retrieved from a sql conversion of
+    <a href="http://www.csse.monash.edu.au/~jwb/j_jmdict.html">JMDict</a>, and is supplied to
+    you in accordance with the JMDict <a href="http://www.csse.monash.edu.au/~jwb/edrdg/licence.html">license statement</a>.
+    Kanji information is retrieved from a sql conversion of <a href="http://www.csse.monash.edu.au/~jwb/kanjidic2/">kanjidic2</a>,
+    and is supplied in accordance with the <a href="http://www.csse.monash.edu.au/~jwb/edrdg/">EDR&amp;D group</a> <a href="http://www.csse.monash.edu.au/~jwb/edrdg/licence.html">license</a>.
+    Name information is retrieved from a sql conversion of <a href="http://www.csse.monash.edu.au/~jwb/enamdict_doc.html">enamdic</a>,
+    and is also supplied in accordance with the <a href="http://www.csse.monash.edu.au/~jwb/edrdg/">EDR&amp;D group</a> <a href="http://www.csse.monash.edu.au/~jwb/edrdg/licence.html">license</a>.
   </div>
 
   <script>
