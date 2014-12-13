@@ -22,5 +22,4 @@ Available `context`s are:
 3. `name` for the names dictionary
 4. `sfx` for the giongo/gitaigo dictionary
 
-Temporarily running over at http://therealpomax.com, this will
-be accessibly "for reals" on http://api.nihongoresources.com
+Live API running over at http://api.nihongoresources.com
