@@ -43,6 +43,8 @@ module.exports = function(dataHandler) {
         params: req.params,
         query: req.query
       });
+      // going to assume this is a bad database connection. Restart through forever
+      process.exit(1);
     }
   };
 };
