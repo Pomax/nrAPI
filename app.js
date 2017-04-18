@@ -16,10 +16,16 @@
   app.use(express.static(__dirname + '/public'));
   
   // CORS settings
-  var corsOptions = {
-    origin: 'http://api.nihongoresources.com https://api.nihongoresources.com'
-  }  
-  app.use(cors(corsOptions));  
+  var whitelist = ['http://api.nihongoresources.com','https://api.nihongoresources.com']
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }));  
 
   // Content related setup
   var nunjucksEnv = (function() {
