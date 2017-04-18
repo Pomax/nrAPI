@@ -30,6 +30,7 @@ module.exports = function(dataHandler) {
 
     // when everything goes wrong
     errorLogger: function(err, req, res, next) {
+      console.trace();
       console.error('error: ' + JSON.stringify({
         timestamp: Date.now(),
         error: err
