@@ -4,6 +4,7 @@
   // Basic app setup
   var compress = require('compression'),
       express = require('express'),
+      cors = require('cors'),
       app = express();
 
   app.use(compress());
@@ -13,6 +14,12 @@
     next();
   });
   app.use(express.static(__dirname + '/public'));
+  
+  // CORS settings
+  var corsOptions = {
+    origin: 'http://api.nihongoresources.com https://api.nihongoresources.com'
+  }  
+  app.use(cors(corsOptions));  
 
   // Content related setup
   var nunjucksEnv = (function() {
