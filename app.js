@@ -16,7 +16,13 @@
   app.use(express.static(__dirname + '/public'));
   
   // CORS settings
-  var whitelist = ['http://api.nihongoresources.com','https://api.nihongoresources.com']
+  var whitelist = [
+    'http://api.nihongoresources.com',
+    'https://api.nihongoresources.com',
+    'http://www.nihongoresources.com',
+    'https://www.nihongoresources.com'
+  ];
+  
   app.use(cors({
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {
