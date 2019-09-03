@@ -9,7 +9,7 @@
 
   app.use(compress());
   app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", req.get('origin'));
+    res.header("Access-Control-Allow-Origin", req.get('origin') || '*');
     res.header("Access-Control-Allow-Credentials", "true");
     next();
   });
